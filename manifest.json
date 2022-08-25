@@ -1,7 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "JobMatch",
+    "name": "Job Match",
     "version": "1.0.0",
+    "description": "Apply to your dreams jobs in style.",
     "content_scripts": [
       {
         "matches": ["<all_urls>"],
@@ -9,14 +10,15 @@
       }
     ],
     "background": {
-        "service_worker": "background.js"
+      "service_worker": "background.js"
     },
     "action": {
-        "default_title": "My YT Bookmarks",
-        "default_popup": "popup.html"
+        "default_title": "JobMatch",
+        "default_popup": "extension/popup.html"
     },
     "icons": {
         "16": "images/icon.png"
     },
-    "permissions": ["tabs"]
+    "permissions": ["tabs", "storage", "scripting"],
+    "host_permissions": ["<all_urls>"]
 }
