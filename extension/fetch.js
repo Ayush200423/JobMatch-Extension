@@ -7,9 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     btn = await document.querySelector('.auth-submit');
     btn.addEventListener('click', () => {
         email = document.querySelector('#email').value;
-        console.log(email)
         password = document.querySelector('#password').value;
-        console.log(password)
         fetch('http://127.0.0.1:5000/api/authenticate', {
             method: "POST",
             headers: {
@@ -22,6 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.log(data);
             if (data['auth'] == true) {
                 chrome.storage.sync.set({logged_in: true});
+                chrome.storage.sync.set({email: email});
                 getUserData();
             }
         })
@@ -57,11 +56,29 @@ function retrievePosting(data) {
     })
     .then((response) => response.json())
     .then((data) => {
-        chrome.storage.sync.get(['fname'], function(result) {
-            console.log(result['fname'])
-        })
-        for (posting of data['results']) {
-            createPending(posting, waitForBtnClick)
+        console.log(data['results'])
+        if (data['results'].length != 0) {
+            chrome.storage.sync.get(['email']).then((email) => {
+                for (posting of data['results']) {
+                    createPending(posting, email['email'], waitForBtnClick)
+                }
+            })
+        } else {
+            chrome.storage.sync.get(['email']).then((email) => {
+                displayError(email['email'])
+            })
         }
     })
+}
+
+function updatePending(url) {
+    fetch('http://127.0.0.1:5000/api/resume-data', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"pending": url}),
+    })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
 }

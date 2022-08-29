@@ -150,9 +150,35 @@ input:focus {
     display: none;
 }
 
-.sign-out {
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sign-out, .apply-all {
     cursor: pointer;
     font-size: 15px;
-    margin: 20px 0 0 20px;
+    margin: 20px;
     color: #0095FF;
+}
+
+/* --- error ---> */
+#error-page {
+    width: 520px;
+    height: 600px;
+    flex-direction: column;
+    display: none;
+}
+
+.message {
+    width: 100%;
+    height: inherit;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.text {
+    font-size: 15px;
 }

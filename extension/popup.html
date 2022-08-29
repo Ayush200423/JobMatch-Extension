@@ -20,10 +20,24 @@
             <p class="messages" id="error"></p>
         </div>
     </div>
+
+    <div id="error-page">
+        <div class="header-container">
+            <a class="sign-out">Sign out?</a>
+        </div>
+        <hr>
+        <div class="message">
+            <div class="text">
+                No job postings found.
+            </div>
+        </div>
+    </div>
     
     <div id="logged-in">
-        <a class="sign-out">Sign out?</a>
-        <br>
+        <div class="header-container">
+            <a class="sign-out">Sign out? <span class="email-heading"></span></a>
+            <a class="apply-all">Apply to all</a>
+        </div>
         <hr>
         <div class="postings"></div>
     </div>
@@ -47,7 +61,6 @@
                 </div>
             </div>
         </div>
-        <hr>
     </template>
 
     <script src="fetch.js"></script>
