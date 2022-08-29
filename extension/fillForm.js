@@ -43,50 +43,52 @@ function fillInput(value, query) {
     }
 }
 
-if (document.querySelector("a[href='/account']")) {
-    let fname = 'dasidj'
-    let lname = 'dsaioj'
-    let phone = 219483
-    let jobTitle = 'Software Engineer'
-    let jobLocation = 'Toronto, ON'
-    let iteration = 0
-    const allElements = [
-        // name -->
-        ['First name', fname],
-        ['Surname', lname],
-
-        // other inputs ->
-        [phone, "input[type='tel']"],
-        [jobTitle, "input[placeholder='Your job title or qualification']"],
-        [jobLocation, "input[placeholder='Your location']"]
-    ]
-
-    clickButton('Apply Now');
-    let iframe = document.querySelector('#apply');
-    iframe.addEventListener('load', () => {
-        while (iteration < 1) {
-            for (let idx = 0; idx < allElements.length; idx++) {
-                if (idx < 2) {
-                    try {
-                        fillName(allElements[idx]);
-                    } catch {
-                        console.log('Applied')
-                    }
-                } else {
-                    try {
-                        fillInput(allElements[idx][0], allElements[idx][1])
-                    } catch {
-                        console.log('Applied')
+function submitForm(fname, lname, phone, jobTitle, jobLocation) {
+    if (document.querySelector("a[href='/account']")) {
+        let fname = 'dasidj'
+        let lname = 'dsaioj'
+        let phone = 219483
+        let jobTitle = 'Software Engineer'
+        let jobLocation = 'Toronto, ON'
+        let iteration = 0
+        const allElements = [
+            // name -->
+            ['First name', fname],
+            ['Surname', lname],
+    
+            // other inputs ->
+            [phone, "input[type='tel']"],
+            [jobTitle, "input[placeholder='Your job title or qualification']"],
+            [jobLocation, "input[placeholder='Your location']"]
+        ]
+    
+        clickButton('Apply Now');
+        let iframe = document.querySelector('#apply');
+        iframe.addEventListener('load', () => {
+            while (iteration < 1) {
+                for (let idx = 0; idx < allElements.length; idx++) {
+                    if (idx < 2) {
+                        try {
+                            fillName(allElements[idx]);
+                        } catch {
+                            console.log('Applied')
+                        }
+                    } else {
+                        try {
+                            fillInput(allElements[idx][0], allElements[idx][1])
+                        } catch {
+                            console.log('Applied')
+                        }
                     }
                 }
+                try {
+                    clickiFrameButton('Continue');
+                    clickiFrameButton('Send');
+                } catch {
+                    console.log('An error occurred')
+                }
+                iteration++
             }
-            try {
-                clickiFrameButton('Continue');
-                clickiFrameButton('Send');
-            } catch {
-                console.log('An error occurred')
-            }
-            iteration++
-        }
-    })
+        })
+    }
 }

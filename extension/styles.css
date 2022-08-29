@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 body {
-    background-color: #000000;
+    background-color: #fff;
 }
 
 * {
@@ -9,46 +9,150 @@ body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    color: #fff;
+    color: #000000;
+}
+
+.postings {
+    overflow: auto;
 }
 
 .container {
-    width: 400px;
-    height: auto;
+    width: 500px;
+    display: flex;
     margin: 10px;
-    padding: 5px;
-    background-color: #0095FF;
+    padding: 10px;
+    transition: 1s;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+}
+
+.left {
+    width: 70%;
+}
+
+.right {
     display: flex;
+    width: 30%;
+    justify-content: end;
 }
 
-.container .left {
-    flex-grow: 1;
-    background-color: red;
-}
-
-.container .saved-info {
+.row {
+    width: 90%;
+    height: 25px;
+    overflow: auto;
+    white-space: nowrap;
     display: flex;
-    flex-wrap: wrap;
-    max-width: 100%;
-    overflow: scroll;
+    align-items: center;
 }
 
-.container .row {
-    width: 100%;
+.left .title {
+    font-size: 18px;
+    margin-bottom: 5px;
 }
 
-.row .title {
-    font-size: 20px;
-}
-
-.row .company, .row .location {
+.left .company, .left .location {
     font-size: 15px;
 }
 
-.container .right {
-    flex-grow: 1;
+.controls {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
 }
 
-.container .controls {
-    flex-grow: 1;
+.btn {
+    width: auto;
+    height: auto;
+    padding: 0 10px 0 10px;
+    background-color: #fff;
+    color: #0095FF;
+    border: 1px solid #0095FF;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.btn:hover {
+    color: #fff;
+    background-color: #0095FF;
+}
+
+/* -- login -- */
+#login {
+    width: 500px;
+    height: 600px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+img {
+    max-height: 300px;
+    max-width: 300px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: auto;
+}
+
+label {
+    font-size: 15px;
+}
+
+input, .auth-submit {
+    font-size: 15px;
+    height: 30px;
+    width: inherit;
+    padding: 10px;
+    border: 1px solid rgb(99, 99, 99);
+    border-radius: 25px;
+    color: #000000;
+    background-color: #fff;
+    margin-bottom: 20px;
+    transition: 0.3s;
+    outline: none;
+}
+
+input:focus {
+    border: 1px solid #0095FF;
+}
+
+.auth-submit {
+    border: 1px solid #0095FF;
+    padding: 0;
+}
+
+.auth-submit:hover {
+    background-color: #0095FF;
+    color: #fff;
+
+}
+
+.messages {
+    font-size: 13px;
+}
+
+.jobmatch-link {
+    color: #0095FF;
+    cursor: pointer;
+}
+
+/* --- signed in ---> */
+#logged-in {
+    width: 520px;
+    max-height: 600px;
+    height: auto;
+    flex-direction: column;
+    display: none;
+}
+
+.sign-out {
+    cursor: pointer;
+    font-size: 15px;
+    margin: 20px 0 0 20px;
+    color: #0095FF;
 }

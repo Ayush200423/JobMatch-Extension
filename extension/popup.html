@@ -8,30 +8,49 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="left">
-            <div class="saved-info">
-                <div class="row">
-                    <div class="title">
-                        Software Engineers aod h soahdao hdo adha sodh
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="posting-details"><span class="company">Google</span> | <span class="location">Mountain View, CA</span></div>
-                </div>
-            </div>
-        </div>
-        <div class="right">
-            <div class="controls">
-                <div class="apply">
-                    1
-                </div>
-                <div class="cancel">
-                    2
-                </div>
-            </div>
+    <div id="login">
+        <img src="../images/completed.gif" alt="JobMatch">
+        <div class="content">
+            <label for="email">Email</label>
+            <input type="text" id="email" placeholder="Email">
+            <label for="email">Password</label>
+            <input type="password" id="password" placeholder="Password">
+            <button class="auth-submit">Login</button>
+            <p class="messages">If you wish to create an account, please visit <span><a class="jobmatch-link">JobMatch</a></span>.</p>
+            <p class="messages" id="error"></p>
         </div>
     </div>
-    <script src="script.js"></script>
+    
+    <div id="logged-in">
+        <a class="sign-out">Sign out?</a>
+        <br>
+        <hr>
+        <div class="postings"></div>
+    </div>
+
+    <template id="posting-template">
+        <div class="container">
+            <div class="left">
+                <div class="title row"></div>
+                <div class="details row">
+                    <span class="company"></span>&nbsp;|&nbsp;<span class="location"></span>
+                </div>
+            </div>
+            <div class="right">
+                <div class="controls">
+                    <button class="apply btn">
+                        Apply
+                    </button>
+                    <button class="cancel btn">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </template>
+
+    <script src="fetch.js"></script>
+    <script src="popup.js"></script>
 </body>
 </html>
