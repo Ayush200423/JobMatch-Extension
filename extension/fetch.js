@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 chrome.storage.sync.set({logged_in: true});
                 chrome.storage.sync.set({email: email});
                 getUserData();
+            } else {
+                authError();
             }
         })
         .catch((error) => {

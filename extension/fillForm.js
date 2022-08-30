@@ -38,55 +38,54 @@ function fillName(component) {
 function fillInput(value, query) {
     let iframe = document.querySelector('#apply');
     inputBox = iframe.contentWindow.document.querySelector(query);
-    if (inputBox.value === '') {
-        inputBox.value = value;
-    }
+    inputBox.value = value;
 }
 
 if (document.querySelector("a[href='/account']")) {
-    let fname = 'dasidj'
-    let lname = 'dsaioj'
-    let phone = 219483
-    let jobTitle = 'Software Engineer'
-    let jobLocation = 'Toronto, ON'
-    let iteration = 0
-    const allElements = [
-        // name -->
-        ['First name', fname],
-        ['Surname', lname],
-
-        // other inputs ->
-        [phone, "input[type='tel']"],
-        [jobTitle, "input[placeholder='Your job title or qualification']"],
-        [jobLocation, "input[placeholder='Your location']"]
-    ]
-
-    clickButton('Apply Now');
-    let iframe = document.querySelector('#apply');
-    iframe.addEventListener('load', () => {
-        while (iteration < 1) {
-            for (let idx = 0; idx < allElements.length; idx++) {
-                if (idx < 2) {
-                    try {
-                        fillName(allElements[idx]);
-                    } catch {
-                        console.log('Applied')
-                    }
-                } else {
-                    try {
-                        fillInput(allElements[idx][0], allElements[idx][1])
-                    } catch {
-                        console.log('Applied')
+    chrome.storage.sync.get(null).then((data) => {
+        let fname = (data['fname'] === undefined) ? '' : data['fname'];
+        let lname = (data['lname'] === undefined) ? '' : data['lname'];
+        let phone = (data['phone'] === undefined) ? '' : data['phone'];
+        let jobTitle = (data['role'] === undefined) ? '' : data['role'];
+        let jobLocation = (data['location'] === undefined) ? '' : data['location'];
+        let iteration = 0
+        const allElements = [
+            // name -->
+            ['First name', fname],
+            ['Surname', lname],
+    
+            // other inputs ->
+            [phone, "input[type='tel']"],
+            [jobTitle, "input[placeholder='Your job title or qualification']"],
+            [jobLocation, "input[placeholder='Your location']"]
+        ]
+        clickButton('Apply Now');
+        let iframe = document.querySelector('#apply');
+        iframe.addEventListener('load', () => {
+            while (iteration < 1) {
+                for (let idx = 0; idx < allElements.length; idx++) {
+                    if (idx < 2) {
+                        try {
+                            fillName(allElements[idx]);
+                        } catch {
+                            console.log('Applied')
+                        }
+                    } else {
+                        try {
+                            fillInput(allElements[idx][0], allElements[idx][1])
+                        } catch {
+                            console.log('Applied')
+                        }
                     }
                 }
+                try {
+                    clickiFrameButton('Continue');
+                    clickiFrameButton('Send');
+                } catch {
+                    console.log('An error occurred')
+                }
+                iteration++
             }
-            try {
-                clickiFrameButton('Continue');
-                clickiFrameButton('Send');
-            } catch {
-                console.log('An error occurred')
-            }
-            iteration++
-        }
+        })
     })
 }

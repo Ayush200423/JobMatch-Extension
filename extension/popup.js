@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     logoutBtns = document.querySelectorAll('.sign-out')
     for (logoutBtn of logoutBtns) {
         logoutBtn.addEventListener('click', () => {
-            chrome.storage.sync.set({logged_in: false});
+            chrome.storage.sync.clear()
             chrome.tabs.create({ url: "http://localhost:5000" });
         })
     }
@@ -16,13 +16,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     for (applyAllBtn of applyAllBtns) {
         applyAllBtn.addEventListener('click', () => {
             allPending = document.querySelectorAll('.apply')
+            let countTabs = 0;
             for (pending of allPending) {
-                postingId = pending.getAttribute('id');
-                chrome.tabs.create({ url: postingId });
+                if (countTabs >= 3) {
+                    break;
+                } else {
+                    countTabs++
+                    postingId = pending.getAttribute('id');
+                    chrome.tabs.create({ url: postingId });
+                    updatePending(postingId)
+                }
             }
         })
     }
 })
+
+function authError() {
+    document.querySelector('#error').textContent = 'Authentication Failed'
+}
 
 function displayError(email) {
     document.getElementById('login').style.display = 'none';
