@@ -36,6 +36,7 @@ function getUserData() {
     fetch('http://127.0.0.1:5000/api/resume-data')
     .then((res) => res.json())
     .then((data) => {
+        console.log(data)
         extractData(data)
         retrievePosting(data)
     })
@@ -58,7 +59,6 @@ function retrievePosting(data) {
     })
     .then((response) => response.json())
     .then((data) => {
-        console.log(data['results'])
         if (data['results'].length != 0) {
             chrome.storage.sync.get(['email']).then((email) => {
                 for (posting of data['results']) {
